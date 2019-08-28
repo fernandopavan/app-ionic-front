@@ -12,17 +12,14 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-
-  <!-- <ion-fab top right edge>
-    <button navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
-  </ion-fab> -->
+  
   <ion-list>
     <button ion-item *ngFor="let item of items">
       <ion-thumbnail item-start>
         <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
       </ion-thumbnail>
-      <h2>{{item.nome}}</h2>
-      <p>{{item.preco | currency}}</p>
+      <h2>{{item.id}}</h2>
+      <p>{{item.ph | currency}}</p>
     </button>
   </ion-list>
 

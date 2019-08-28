@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ProfilePage {
 
-  Usuario: UsuarioDTO;
+  usuario: UsuarioDTO;
   picture: string;
   profileImage;
   cameraOn: boolean = false;
@@ -23,7 +23,7 @@ export class ProfilePage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public storage: StorageService,
-    public UsuarioService: UsuarioService,
+    public usuarioService: UsuarioService,
     public camera: Camera,
     public sanitizer: DomSanitizer) {
 

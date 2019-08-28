@@ -8,8 +8,21 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-card>
+    <ion-card-header>
+      Bar Chart
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+
   <ion-fab top right edge>
-    <button navPush="" ion-fab mini><ion-icon name="cart">Tratar</ion-icon></button>
+    <button navPush="" ion-fab mini>
+      <ion-icon name="cart">Tratar</ion-icon>
+    </button>
   </ion-fab>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="showAnalises('ph')">

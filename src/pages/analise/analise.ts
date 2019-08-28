@@ -11,11 +11,11 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 })
 export class AnalisePage {
 
-  items : AnaliseDTO[] = [];
-  page : number = 0;
+  items: AnaliseDTO[] = [];
+  page: number = 0;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public analiseService: AnaliseService,
     public loadingCtrl: LoadingController) {
@@ -28,7 +28,7 @@ export class AnalisePage {
   loadData() {
     let tipo = this.navParams.get('tipo');
     let usuario_id = 1;
-    
+
     let loader = this.presentLoading();
     this.analiseService.findByUser(usuario_id, this.page, 10)
       .subscribe(response => {
