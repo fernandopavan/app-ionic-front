@@ -13,12 +13,25 @@ export class AnalisePage {
 
   items: AnaliseDTO[] = [];
   page: number = 0;
+  tipo: string;
+  titulo: string;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public analiseService: AnaliseService,
     public loadingCtrl: LoadingController) {
+
+    this.tipo = this.navParams.get('tipo');
+    if (this.tipo == 'ph') {
+      this.titulo = "pH";
+    }else if (this.tipo == 'temperatura') {
+      this.titulo = "Temperatura";
+    } else if (this.tipo == 'turbidez') {
+      this.titulo = "Turbidez";
+    } else {
+      this.titulo = "Cloro";
+    }
   }
 
   ionViewDidLoad() {
@@ -26,20 +39,20 @@ export class AnalisePage {
   }
 
   loadData() {
-    let tipo = this.navParams.get('tipo');
     let usuario_id = 1;
+    console.log(this.tipo);
 
     let loader = this.presentLoading();
-    this.analiseService.findByUser(usuario_id, this.page, 10)
+    // this.analiseService.findByUser(usuario_id, this.page, 10)
+    this.analiseService.findAll()
       .subscribe(response => {
-        this.items = this.items.concat(response['content']);
+        // this.items = this.items.concat(response['content']);
+        this.items = this.items.concat(response);
         loader.dismiss();
-        console.log(this.page);
-        console.log(this.items);
       },
-      error => {
-        loader.dismiss();
-      });
+        error => {
+          loader.dismiss();
+        });
   }
 
   presentLoading() {

@@ -12,12 +12,18 @@ import { Chart } from "chart.js";
 })
 export class VisaoGeralPage implements OnInit {
   
-  @ViewChild("barCanvas") barCanvas: ElementRef;
+  @ViewChild("phCanvas") phCanvas: ElementRef;
+  @ViewChild("cloroCanvas") cloroCanvas: ElementRef;
+  @ViewChild("turbidezCanvas") turbidezCanvas: ElementRef;
+  @ViewChild("temperaturaCanvas") temperaturaCanvas: ElementRef;
 
   bucketUrl: string = API_CONFIG.bucketBaseUrl;
 
   items: VisaoGeralDTO[];
-  private barChart: Chart;
+  // private phCanvas: Chart;
+  // private cloroCanvas: Chart;
+  // private turbidezCanvas: Chart;
+  // private temperaturaCanvas: Chart;
 
   constructor(
     public navCtrl: NavController, 
@@ -38,30 +44,16 @@ export class VisaoGeralPage implements OnInit {
   }
   
   ngOnInit() {
-    this.barChart = new Chart(this.barCanvas.nativeElement, {
+    this.phCanvas = new Chart(this.phCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["11/06", "16/06", "23/06", "30/06", "10/07"],
         datasets: [
           {
-            label: "# of Votes",
+            label: "",
             data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)"
-            ],
-            borderColor: [
-              "rgba(255,99,132,1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)"
-            ],
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
             borderWidth: 1
           }
         ]
@@ -78,5 +70,55 @@ export class VisaoGeralPage implements OnInit {
         }
       }
     });
+
+    this.cloroCanvas = new Chart(this.cloroCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: ["11/06", "16/06", "23/06", "30/06", "10/07"],
+        datasets: [
+          {
+            label: "",
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1
+          }
+        ]
+      }
+    });
+
+    this.turbidezCanvas = new Chart(this.turbidezCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: ["11/06", "16/06", "23/06", "30/06", "10/07"],
+        datasets: [
+          {
+            label: "",
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: "rgba(153, 102, 255, 0.2)",
+            borderColor: "rgba(153, 102, 255, 1)",
+            borderWidth: 1
+          }
+        ]
+      }
+    });
+
+    this.temperaturaCanvas = new Chart(this.temperaturaCanvas.nativeElement, {
+      type: "bar",
+      data: {
+        labels: ["11/06", "16/06", "23/06", "30/06", "10/07"],
+        datasets: [
+          {
+            label: "",
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: "rgba(255, 159, 64, 0.2)",
+            borderColor: "rgba(255, 159, 64, 1)",
+            borderWidth: 1
+          }
+        ]
+      }
+    });
   }
+
+
 }

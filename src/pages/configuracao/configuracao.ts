@@ -25,13 +25,12 @@ export class ConfiguracaoPage {
     public sanitizer: DomSanitizer) {
 
     this.formGroup = this.formBuilder.group({
-      capacidadeLitros: ['1', [Validators.required ]],
-      periodoRepeticao: ['2', [Validators.required ]],
-      horarioPrevisto : ['3', [Validators.required ]],
+      capacidadeLitros: ['', [Validators.required]],
+      periodoRepeticao: ['', [Validators.required]],
+      horarioPrevisto: ['', [Validators.required]],
     });
   }
 
-  //new Date().toISOString()
   ionViewDidLoad() {
     this.loadData();
   }
@@ -40,10 +39,25 @@ export class ConfiguracaoPage {
     this.configuracaoService.findById("1")
       .subscribe(response => {
         this.configuracao = response as ConfiguracaoDTO;
+        
+        let periodo = '';
+        if (this.configuracao.periodoRepeticao == 'UM_AO_DIA') {
+          periodo = '0';
+        } else if (this.configuracao.periodoRepeticao == 'TRES_POR_SEMANA') {
+          periodo = '1';
+        } else {
+          periodo = '2';
+        }
+
+        this.formGroup = this.formBuilder.group({
+          capacidadeLitros: [this.configuracao.capacidadeLitros, [Validators.required]],
+          periodoRepeticao: [periodo, [Validators.required]],
+          horarioPrevisto: [this.configuracao.horarioPrevisto, [Validators.required]],
+        });
       },
         error => {
         });
-  
+
   }
 
   save() {
@@ -51,7 +65,7 @@ export class ConfiguracaoPage {
       .subscribe(response => {
         this.success();
       },
-      error => {});
+        error => { });
   }
 
   update() {
@@ -59,7 +73,7 @@ export class ConfiguracaoPage {
       .subscribe(response => {
         this.success();
       },
-      error => {});
+        error => { });
   }
 
   success() {
@@ -71,7 +85,7 @@ export class ConfiguracaoPage {
         {
           text: 'Ok',
           handler: () => {
-            this.navCtrl.pop();
+            this.navCtrl.setRoot('ConfiguracaoPage');
           }
         }
       ]

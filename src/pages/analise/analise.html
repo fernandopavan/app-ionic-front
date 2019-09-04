@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Análise pH</ion-title>
+    <ion-title>{{titulo}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,16 +13,135 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
-  <ion-list>
-    <button ion-item *ngFor="let item of items">
-      <ion-thumbnail item-start>
-        <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
-      </ion-thumbnail>
-      <h2>{{item.id}}</h2>
-      <p>{{item.ph | currency}}</p>
-    </button>
+  <ion-list *ngIf="tipo == 'ph'">
+    <ion-item *ngFor="let item of items">
+
+        <ion-grid>
+            <ion-row>
+              <ion-col col-6>
+                <h2>Antes: {{item.ph}}</h2>
+              </ion-col>
+              <ion-col col-6>
+                <ion-note item-end>{{item.dataLeitura}}</ion-note>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-3>
+                <h2>(+) {{item.phP}} ml</h2>
+              </ion-col>              
+              <ion-col col-3>
+                  <h2>(-) {{item.phN}} ml</h2>
+                </ion-col>
+              <ion-col col-6>
+                <ion-note item-end>{{item.dataTratamento}}</ion-note>
+              </ion-col>
+            </ion-row>
+            
+            <ion-row>
+                <ion-col col-6>
+                  <h2>Depois: {{item.ph}}</h2>
+                </ion-col>
+                <ion-col col-6>
+                  <ion-note item-end>{{item.dataLeitura}}</ion-note>
+                </ion-col>
+              </ion-row>
+
+          </ion-grid>
+
+    </ion-item>
   </ion-list>
 
+  <ion-list *ngIf="tipo == 'cloro'">
+      <ion-item *ngFor="let item of items">
+  
+          <ion-grid>
+              <ion-row>
+                <ion-col col-6>
+                  <h2>Antes: {{item.condutividade}} ppm</h2>
+                </ion-col>
+                <ion-col col-6>
+                  <ion-note item-end>{{item.dataLeitura}}</ion-note>
+                </ion-col>
+              </ion-row>
+  
+              <ion-row>
+                <ion-col col-6>
+                  <h2>Cloro: {{item.cloro}} ml</h2>
+                </ion-col>        
+                <ion-col col-6>
+                  <ion-note item-end>{{item.dataTratamento}}</ion-note>
+                </ion-col>
+              </ion-row>
+              
+              <ion-row>
+                  <ion-col col-6>
+                    <h2>Depois: {{item.condutividade}} ppm</h2>
+                  </ion-col>
+                  <ion-col col-6>
+                    <ion-note item-end>{{item.dataLeitura}}</ion-note>
+                  </ion-col>
+                </ion-row>
+  
+            </ion-grid>
+  
+      </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="tipo == 'turbidez'">
+        <ion-item *ngFor="let item of items">
+    
+            <ion-grid>
+                <ion-row>
+                  <ion-col col-6>
+                    <h2>Antes: {{item.turbidez}} NTU</h2>
+                  </ion-col>
+                  <ion-col col-6>
+                    <ion-note item-end>{{item.dataLeitura}}</ion-note>
+                  </ion-col>
+                </ion-row>
+    
+                <ion-row>
+                  <ion-col col-6>
+                    <h2>Decantador: {{item.decantador}} ml</h2>
+                  </ion-col>      
+                  <ion-col col-6>
+                    <ion-note item-end>{{item.dataTratamento}}</ion-note>
+                  </ion-col>
+                </ion-row>
+                
+                <ion-row>
+                    <ion-col col-6>
+                      <h2>Depois: {{item.turbidez}} NTU</h2>
+                    </ion-col>
+                    <ion-col col-6>
+                      <ion-note item-end>{{item.dataLeitura}}</ion-note>
+                    </ion-col>
+                  </ion-row>
+    
+              </ion-grid>
+    
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="tipo == 'temperatura'">
+          <ion-item *ngFor="let item of items">
+      
+              <ion-grid>
+                  <ion-row>
+                    <ion-col col-6>
+                      <h2>Temp.: {{item.temperatura}} °C</h2>
+                    </ion-col>
+                    <ion-col col-6>
+                      <ion-note item-end>{{item.dataLeitura}}</ion-note>
+                    </ion-col>
+                  </ion-row>
+      
+                </ion-grid>
+      
+          </ion-item>
+        </ion-list>
+      
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>  

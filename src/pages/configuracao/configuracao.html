@@ -8,10 +8,6 @@
 </ion-header>
 
 <ion-content padding>
-  <p>{{configuracao?.capacidadeLitros}}</p>
-  <p>{{configuracao?.periodoRepeticao}}</p>
-  <p>{{configuracao?.horarioPrevisto}}</p>
-
 
   <form [formGroup]="formGroup" (ngSubmit)="update(); $event.preventDefault()">
 
@@ -21,23 +17,23 @@
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.capacidadeLitros.dirty && formGroup.controls.capacidadeLitros.errors" margin-left>Valor inválido</p>
 
-    <ion-list>
-      <ion-item>
-        <ion-label stacked>Período repetição*</ion-label>
-        <ion-select formControlName="periodoRepeticao" >
-          <ion-option value="0">Uma vez ao dia</ion-option>
-          <ion-option value="1">Três vezes por semana</ion-option>
-          <ion-option value="2">Uma vez por semana</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>    
-    <p class="danger" *ngIf="formGroup.controls.periodoRepeticao.dirty && formGroup.controls.periodoRepeticao.errors" margin-left>Valor inválido</p>
-
-    <ion-item>
+    <ion-item padding>
       <ion-label stacked>Horário previsto*</ion-label>
       <ion-datetime displayFormat="h:mm a" pickerFormat="h mm a" formControlName="horarioPrevisto" ></ion-datetime>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.horarioPrevisto.dirty && formGroup.controls.horarioPrevisto.errors" margin-left>Valor inválido</p>
+
+    <ion-list>
+        <ion-item>
+          <ion-label stacked>Período repetição*</ion-label>
+          <ion-select formControlName="periodoRepeticao" >
+            <ion-option value="0">Uma vez ao dia</ion-option>
+            <ion-option value="1">Três vezes por semana</ion-option>
+            <ion-option value="2">Uma vez por semana</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>    
+      <p class="danger" *ngIf="formGroup.controls.periodoRepeticao.dirty && formGroup.controls.periodoRepeticao.errors" margin-left>Valor inválido</p>
     
     <button ion-button block type="submit" [disabled]="formGroup.invalid">Salvar</button>
   </form>

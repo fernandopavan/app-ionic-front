@@ -10,7 +10,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
-import { ImageUtilService } from '../services/image-util.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 
 import { ConfiguracaoService } from '../services/domain/configuracao.service';
@@ -38,7 +37,6 @@ import { AnaliseService } from '../services/domain/analise.service';
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
-    ImageUtilService,
 
     ConfiguracaoService,
     UsuarioService,

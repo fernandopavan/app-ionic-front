@@ -9,24 +9,49 @@
 
 <ion-content padding>
 
-  <ion-card>
+  <ion-card (click)="showAnalises('ph')">
     <ion-card-header>
-      Bar Chart
+      pH
     </ion-card-header>
     <ion-card-content>
-      <canvas #barCanvas></canvas>
+      <canvas #phCanvas></canvas>
     </ion-card-content>
   </ion-card>
 
+  <ion-card (click)="showAnalises('cloro')">
+    <ion-card-header>
+      Cloro
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #cloroCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-fab top right edge>
-    <button navPush="" ion-fab mini>
-      <ion-icon name="cart">Tratar</ion-icon>
-    </button>
-  </ion-fab>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="showAnalises('ph')">
-      <h2> {{ item.nome }} </h2>
-    </button>
-  </ion-list>
+  <ion-card (click)="showAnalises('turbidez')">
+    <ion-card-header>
+      Turbidez
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #turbidezCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="showAnalises('temperatura')">
+    <ion-card-header>
+      Temperatura
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #temperaturaCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <div padding>
+    <p>
+      <button ion-button large color="secondary" icon-start>
+        <ion-icon name="home"></ion-icon>
+        Iniciar tratamento
+      </button>
+    </p>
+  </div>
+
 </ion-content>
