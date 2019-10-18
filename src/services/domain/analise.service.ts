@@ -14,7 +14,11 @@ export class AnaliseService {
         return this.http.get<AnaliseDTO[]>(`${API_CONFIG.baseUrl}/analises`);
     }
 
-    findByUser(usuario_id: number, page: number = 0, linesPerPage: number = 24) {
-        return this.http.get(`${API_CONFIG.baseUrl}/analises/?usuario=${usuario_id}&page=${page}&linesPerPage=${linesPerPage}`);
+    findAllPaginate(page: number = 0, linesPerPage: number = 20) {
+        return this.http.get(`${API_CONFIG.baseUrl}/analises/?page=${page}&linesPerPage=${linesPerPage}`);
+    }
+
+    novaAnalise() {
+        return this.http.get(`${API_CONFIG.baseUrl}/analises/iniciar`);
     }
 }

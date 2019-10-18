@@ -25,7 +25,7 @@ export class AnalisePage {
     this.tipo = this.navParams.get('tipo');
     if (this.tipo == 'ph') {
       this.titulo = "pH";
-    }else if (this.tipo == 'temperatura') {
+    } else if (this.tipo == 'temperatura') {
       this.titulo = "Temperatura";
     } else if (this.tipo == 'turbidez') {
       this.titulo = "Turbidez";
@@ -39,15 +39,10 @@ export class AnalisePage {
   }
 
   loadData() {
-    let usuario_id = 1;
-    console.log(this.tipo);
-
     let loader = this.presentLoading();
-    // this.analiseService.findByUser(usuario_id, this.page, 10)
-    this.analiseService.findAll()
+    this.analiseService.findAllPaginate(this.page, 10)
       .subscribe(response => {
-        // this.items = this.items.concat(response['content']);
-        this.items = this.items.concat(response);
+        this.items = this.items.concat(response['content']);
         loader.dismiss();
       },
         error => {

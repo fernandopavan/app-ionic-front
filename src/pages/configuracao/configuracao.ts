@@ -25,9 +25,10 @@ export class ConfiguracaoPage {
     public sanitizer: DomSanitizer) {
 
     this.formGroup = this.formBuilder.group({
-      capacidadeLitros: ['', [Validators.required]],
-      periodoRepeticao: ['', [Validators.required]],
-      horarioPrevisto: ['', [Validators.required]],
+      capacidadeLitros: [10000, [Validators.required]],
+      periodoRepeticao: ['UM_AO_DIA', [Validators.required]],
+      temAquecedor: [false, Validators.required],
+      temperaturaIdeal: [25, [Validators.required]],      
     });
   }
 
@@ -39,20 +40,23 @@ export class ConfiguracaoPage {
     this.configuracaoService.findById("1")
       .subscribe(response => {
         this.configuracao = response as ConfiguracaoDTO;
-        
+
         let periodo = '';
         if (this.configuracao.periodoRepeticao == 'UM_AO_DIA') {
           periodo = '0';
-        } else if (this.configuracao.periodoRepeticao == 'TRES_POR_SEMANA') {
+        } else if (this.configuracao.periodoRepeticao == 'DOIS_AO_DIA') {
           periodo = '1';
-        } else {
+        } else if (this.configuracao.periodoRepeticao == 'UM_CADA_DOIS_DIAS') {
           periodo = '2';
+        } else {
+          periodo = '4';
         }
 
         this.formGroup = this.formBuilder.group({
           capacidadeLitros: [this.configuracao.capacidadeLitros, [Validators.required]],
           periodoRepeticao: [periodo, [Validators.required]],
-          horarioPrevisto: [this.configuracao.horarioPrevisto, [Validators.required]],
+          temAquecedor: [this.configuracao.temAquecedor, [Validators.required]],
+          temperaturaIdeal: [this.configuracao.temperaturaIdeal, [Validators.required]],
         });
       },
         error => {

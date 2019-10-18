@@ -12,29 +12,39 @@
   <form [formGroup]="formGroup" (ngSubmit)="update(); $event.preventDefault()">
 
     <ion-item>
-      <ion-label stacked>Capacidade (L)*</ion-label>
+      <ion-label stacked>Capacidade (L)</ion-label>
       <ion-input formControlName="capacidadeLitros" type="text"></ion-input>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls.capacidadeLitros.dirty && formGroup.controls.capacidadeLitros.errors" margin-left>Valor inválido</p>
 
-    <ion-item padding>
-      <ion-label stacked>Horário previsto*</ion-label>
-      <ion-datetime displayFormat="h:mm a" pickerFormat="h mm a" formControlName="horarioPrevisto" ></ion-datetime>
-    </ion-item>
-    <p class="danger" *ngIf="formGroup.controls.horarioPrevisto.dirty && formGroup.controls.horarioPrevisto.errors" margin-left>Valor inválido</p>
-
     <ion-list>
         <ion-item>
-          <ion-label stacked>Período repetição*</ion-label>
+          <ion-label stacked>Período repetição</ion-label>
           <ion-select formControlName="periodoRepeticao" >
-            <ion-option value="0">Uma vez ao dia</ion-option>
-            <ion-option value="1">Três vezes por semana</ion-option>
-            <ion-option value="2">Uma vez por semana</ion-option>
+            <ion-option value="0">Uma vez por dia todos os dias (9AM)</ion-option>
+            <ion-option value="1">Duas vezes por dia todos os dia (9AM - 9PM)</ion-option>
+            <ion-option value="2">Duas vezes por dia todos os dia (9AM)</ion-option>
+            <ion-option value="3">Duas vezes por dia a cada dois dias (9AM - 9PM)</ion-option>
           </ion-select>
         </ion-item>
       </ion-list>    
       <p class="danger" *ngIf="formGroup.controls.periodoRepeticao.dirty && formGroup.controls.periodoRepeticao.errors" margin-left>Valor inválido</p>
     
+      <ion-item>
+        <ion-label stacked>Tem aquecedor?</ion-label>        
+        <ion-checkbox formControlName="temAquecedor" color="secondary"></ion-checkbox>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls.temAquecedor.dirty && formGroup.controls.temAquecedor.errors" margin-left>Valor inválido</p>
+
+      <ion-item *ngIf="formGroup.value['temAquecedor'] == true">
+        <ion-label stacked>Temperatura ideal: {{formGroup.value['temperaturaIdeal']}}ºC</ion-label>
+        <ion-range min="10" max="35" step="1" snaps="true" formControlName="temperaturaIdeal" color="danger">
+          <ion-icon range-left small color="danger" name="thermometer"></ion-icon>
+          <ion-icon range-right color="danger" name="thermometer"></ion-icon>
+        </ion-range>
+      </ion-item>
+      <p class="danger" *ngIf="formGroup.controls.temperaturaIdeal.dirty && formGroup.controls.temperaturaIdeal.errors" margin-left>Valor inválido</p>
+
     <button ion-button block type="submit" [disabled]="formGroup.invalid">Salvar</button>
   </form>
 
