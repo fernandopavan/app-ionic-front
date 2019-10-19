@@ -26,6 +26,7 @@ export class ConfiguracaoPage {
 
     this.formGroup = this.formBuilder.group({
       capacidadeLitros: [10000, [Validators.required]],
+      fatorDecantadorClarificante: [5, [Validators.required]],
       periodoRepeticao: ['UM_AO_DIA', [Validators.required]],
       temAquecedor: [false, Validators.required],
       temperaturaIdeal: [25, [Validators.required]],      
@@ -54,6 +55,7 @@ export class ConfiguracaoPage {
 
         this.formGroup = this.formBuilder.group({
           capacidadeLitros: [this.configuracao.capacidadeLitros, [Validators.required]],
+          fatorDecantadorClarificante: [this.configuracao.fatorDecantadorClarificante, [Validators.required]],
           periodoRepeticao: [periodo, [Validators.required]],
           temAquecedor: [this.configuracao.temAquecedor, [Validators.required]],
           temperaturaIdeal: [this.configuracao.temperaturaIdeal, [Validators.required]],

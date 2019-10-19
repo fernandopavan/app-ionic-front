@@ -5,4 +5,5 @@ export interface VisaoGeralDTO {
     condutividade: number;
     temperatura: number;
     dataLeitura: string;
+    temperaturaNovo: string;
 }

@@ -21,4 +21,8 @@ export class AnaliseService {
     novaAnalise() {
         return this.http.get(`${API_CONFIG.baseUrl}/analises/iniciar`);
     }
+
+    aquecerPiscina() {
+        return this.http.get(`${API_CONFIG.baseUrl}/analises/aquecer`);
+    }
 }

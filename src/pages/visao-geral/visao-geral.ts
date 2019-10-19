@@ -139,7 +139,7 @@ export class VisaoGeralPage {
         datasets: [
           {
             label: "",
-            data: this.graficoDados.map(a => a.temperatura),
+            data: this.graficoDados.map(a => a.temperaturaNovo != null ? a.temperaturaNovo : a.temperatura),
             backgroundColor: "rgba(255, 159, 64, 0.2)",
             borderColor: "rgba(255, 159, 64, 1)",
             borderWidth: 1
