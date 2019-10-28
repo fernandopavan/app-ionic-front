@@ -2,7 +2,6 @@ import { Component, ViewChild, ElementRef, LOCALE_ID } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AnaliseService } from '../../services/domain/analise.service';
 import { VisaoGeralDTO } from '../../models/visao_geral.dto';
-import { API_CONFIG } from '../../config/api.config';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Chart } from "chart.js";
 import { DatePipe, registerLocaleData  } from '@angular/common';
@@ -23,8 +22,6 @@ export class VisaoGeralPage {
   @ViewChild("turbidezCanvas") turbidezCanvas: ElementRef;
   @ViewChild("temperaturaCanvas") temperaturaCanvas: ElementRef;
 
-  bucketUrl: string = API_CONFIG.bucketBaseUrl;
-
   graficoDados: VisaoGeralDTO[];
 
   constructor(
@@ -36,6 +33,10 @@ export class VisaoGeralPage {
   }
 
   ionViewDidLoad() {    
+    this.loadData();
+  }
+
+  loadData(){
     this.analiseService.findAllPaginate(0, 5)
       .subscribe(response => {
         this.graficoDados = response['content'];
@@ -72,11 +73,18 @@ export class VisaoGeralPage {
     alert.present();
   }
 
+  doRefresh(refresher) {
+    this.loadData();
+    setTimeout(() => {
+      refresher.complete();
+    }, 3000);
+  }
+
   carregaGrafico() {
     this.phCanvas = new Chart(this.phCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: this.graficoDados.map(a => a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16)),
+        labels: this.graficoDados.map(a => a.dataLeitura ? a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16) : ''),
         datasets: [
           {
             label: "",
@@ -103,7 +111,7 @@ export class VisaoGeralPage {
     this.cloroCanvas = new Chart(this.cloroCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: this.graficoDados.map(a => a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16)),
+        labels: this.graficoDados.map(a => a.dataLeitura ? a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16) : ''),
         datasets: [
           {
             label: "",
@@ -119,7 +127,7 @@ export class VisaoGeralPage {
     this.turbidezCanvas = new Chart(this.turbidezCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: this.graficoDados.map(a => a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16)),
+        labels: this.graficoDados.map(a => a.dataLeitura ? a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16) : ''),
         datasets: [
           {
             label: "",
@@ -135,7 +143,7 @@ export class VisaoGeralPage {
     this.temperaturaCanvas = new Chart(this.temperaturaCanvas.nativeElement, {
       type: "bar",
       data: {
-        labels: this.graficoDados.map(a => a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16)),
+        labels: this.graficoDados.map(a => a.dataLeitura ? a.dataLeitura.substring(0,5) + " " + a.dataLeitura.substring(11,16) : ''),
         datasets: [
           {
             label: "",
